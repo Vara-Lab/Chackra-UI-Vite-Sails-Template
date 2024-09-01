@@ -1,3 +1,1 @@
-import { Wallet } from './ui';
-
-export { Wallet };
+export { MultiWallet } from "./ui";
