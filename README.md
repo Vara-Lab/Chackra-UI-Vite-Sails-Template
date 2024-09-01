@@ -14,3 +14,10 @@ export const sponsorMnemonic = "";
 ```
 
 4. With this, you can now use the example in the template.
+5. You can try the frontend template on gitpod!
+
+<p align="center">
+  <a href="https://gitpod.io/#https://github.com/Vara-Lab/Chackra-UI-Vite-Sails-Template.git" target="_blank">
+    <img src="https://gitpod.io/button/open-in-gitpod.svg" width="240" alt="Gitpod">
+  </a>
+</p>
