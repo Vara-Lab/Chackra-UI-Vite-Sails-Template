@@ -1,0 +1,13 @@
+.signless-form__title {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.signless-form .signless-form__input,
+.signless-form .signless-form__button {
+    margin-bottom: 10px;
+}
+
+.signless-form > * {
+    margin-top: 10px;
+}

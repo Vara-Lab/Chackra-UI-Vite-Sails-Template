@@ -1,0 +1,14 @@
+.information {
+    padding-left: 10px;
+}
+
+.examples {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 auto;
+    width: fit-content;
+    padding: 10px;
+    border: solid 2px black;
+    border-radius: 10px;
+}
