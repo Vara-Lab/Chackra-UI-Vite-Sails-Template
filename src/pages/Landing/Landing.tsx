@@ -30,7 +30,7 @@ function Landing() {
           Examples
         </Button>
 
-        <Center>
+        {/* <Center>
           <VStack>
             {connected ? (
               <></>
@@ -66,7 +66,7 @@ function Landing() {
               </>
             )}
           </VStack>
-        </Center>
+        </Center> */}
       </VStack>
     </Center>
   );
