@@ -13,7 +13,8 @@ import {
     ISailsCalls,
     WalletSigner,
 } from "./types";
-import { IKeyringPair } from "@polkadot/types/types";
+import { Codec, CodecClass, IKeyringPair } from "@polkadot/types/types";
+import { Signer } from "@polkadot/api/types";
 
 export class SailsCalls {
     private sails: Sails;
@@ -625,7 +626,7 @@ export class SailsCalls {
 
             if ("signer" in signerData) {
                 const { userAddress, signer } = signerData as WalletSigner;
-                transaction.withAccount(userAddress, { signer });
+                transaction.withAccount(userAddress, { signer: (signer as string | CodecClass<Codec, any[]>) as Signer });
             } else {
                 const keyringPair = signerData as IKeyringPair;
                 transaction.withAccount(keyringPair);

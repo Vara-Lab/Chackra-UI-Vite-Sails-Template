@@ -1,4 +1,3 @@
-import React from 'react';
 import { Logo } from './logo';
 import { AccountInfo } from './account-info';
 import styles from './header.module.scss';
@@ -14,7 +13,6 @@ export function Header({ isAccountVisible }: Props) {
   return (
     <header className={styles.header}>
       <Logo />
-      
       {isAccountVisible && <MultiWallet/>}
     </header>
   );

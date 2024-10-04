@@ -2,7 +2,7 @@ import { Button } from '@gear-js/vara-ui';
 import { useAccount, useAlert } from '@gear-js/react-hooks';
 import { useSailsCalls } from '@/app/hooks';
 import { web3FromSource } from '@polkadot/extension-dapp';
-import { Signer } from '@polkadot/types/types';
+import { Codec, CodecClass, Signer } from '@polkadot/types/types';
 import { HexString } from '@gear-js/api';
 import '../ButtonsContainer.css';
 
@@ -20,7 +20,8 @@ export const NormalButtons = () => {
             }
 
             const { signer } = await web3FromSource(account.meta.source);
-            resolve([account.decodedAddress, signer]);
+            const temp = (signer as string | CodecClass<Codec, any[]>) as Signer;
+            resolve([account.decodedAddress, temp]);
         })
     }
 

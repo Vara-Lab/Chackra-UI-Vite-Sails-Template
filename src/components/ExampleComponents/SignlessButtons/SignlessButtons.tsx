@@ -107,7 +107,6 @@ export const SignlessButtons = () => {
                             'Ping/PingSignless',
                             account.decodedAddress
                         );
-                        console.log('Decoded address: ', account.decodedAddress);
                     } else {
                         await sendMessageWithPayload(
                             'Ping/PingNoWallet',
@@ -131,8 +130,6 @@ export const SignlessButtons = () => {
                             'Ping/PongSignless',
                             account.decodedAddress
                         );
-                        console.log('Decoded address: ', account.decodedAddress);
-                        
                     } else {
                         await sendMessageWithPayload(
                             'Ping/PongNoWallet',

@@ -7,6 +7,7 @@ import { useSailsCalls } from '@/app/hooks';
 import { renewVoucher, addTokensToVoucher, vouchersIdOfAddress } from '@/app/utils';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import '../ButtonsContainer.css';
+import { Codec, CodecClass, Signer } from '@polkadot/types/types';
 
 
 export const VoucherButtons = () => {
@@ -101,13 +102,13 @@ export const VoucherButtons = () => {
                 }
 
                 const { signer } = await web3FromSource(account.meta.source);
-
+                const temp = (signer as string | CodecClass<Codec, any[]>) as Signer;
                 try {
                     const response = await sails.command(
                         'Ping/Ping',
                         {
                             userAddress: account.decodedAddress,
-                            signer
+                            signer: temp
                         },
                         {
                             voucherId: voucherIdToUse,
@@ -165,13 +166,13 @@ export const VoucherButtons = () => {
                 }
 
                 const { signer } = await web3FromSource(account.meta.source);
-
+                const temp = (signer as string | CodecClass<Codec, any[]>) as Signer;
                 try {
                     const response = await sails.command(
                         'Ping/Pong',
                         {
                             userAddress: account.decodedAddress,
-                            signer
+                            signer: temp
                         },
                         {
                             voucherId: voucherIdToUse,
