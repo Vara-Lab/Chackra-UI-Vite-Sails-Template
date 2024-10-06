@@ -108,7 +108,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
 
         try {
             await sails.command(
-                'Signless/BindSignlessDataToNoWalletAccount',
+                'KeyringService/BindKeyringDataToUserCodedName',
                 newSignlessAccount,
                 {
                     voucherId: signlessVoucherId,
@@ -146,7 +146,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
         setLoadingAnAction(true);
 
         const contractState: any = await sails.query(
-            'QueryService/SignlessAddressFromUserAddress',
+            'QueryService/KeyringAddressFromUserAddress',
             {
                 callArguments: [
                     account.decodedAddress
@@ -158,7 +158,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
 
         if (signlessAccountAddress) {
             const contractState = await sails.query(
-                'QueryService/SignlessAccountData',
+                'QueryService/KeyringAccountData',
                 {
                     callArguments: [
                         signlessAccountAddress
@@ -242,7 +242,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
 
         try {
             await sails.command(
-                'Signless/BindSignlessDataToAddress',
+                'KeyringService/BindKeyringDataToUserAddress',
                 newSignlessAccount,
                 {
                     voucherId: signlessVoucherId,
@@ -283,7 +283,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
         const encryptedName = CryptoJs.SHA256(accountName).toString();
 
         let contractState: any = await sails.query(
-            'QueryService/SignlessAddressFromNoWalletAccount',
+            'QueryService/KeyringAddressFromUserCodedName',
             {
                 callArguments: [
                     encryptedName
@@ -300,7 +300,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
         }
 
         contractState = await sails.query(
-            'QueryService/SignlessAccountData',
+            'QueryService/KeyringAccountData',
             {
                 callArguments: [
                     signlessAccountAddress

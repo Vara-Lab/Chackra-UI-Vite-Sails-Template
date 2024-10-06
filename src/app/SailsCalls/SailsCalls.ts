@@ -1432,9 +1432,6 @@ export class SailsCalls {
         const signlessToSend = JSON.parse(JSON.stringify(pair));
         delete signlessToSend['encoding'];
         delete signlessToSend['meta'];
-        // const encodingType = signlessToSend.encoding.type;
-        // delete signlessToSend.encoding['type'];
-        // signlessToSend.encoding['encodingType'] = encodingType;
     
         return signlessToSend;
     }

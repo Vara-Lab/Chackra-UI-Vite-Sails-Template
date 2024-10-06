@@ -13,6 +13,8 @@ export const sponsorName = "";
 export const sponsorMnemonic = "";
 ```
 
+> Note: The template contains a sponsor example that contains tokens, for your dApp, you need to put a sponsor name and a sponsor mnemonic
+
 4. With this, you can now use the example in the template.
 5. You can try the frontend template on gitpod!
 

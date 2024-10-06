@@ -59,9 +59,9 @@ function Home () {
                         return;
                     }
 
-                    const response = await sails.query('QueryService/LastWhoCall');
+                    const response = await sails.query('QueryService/LastCaller');
 
-                    setContractState(JSON.stringify(response));
+                    setContractState("Last who call: " + JSON.stringify(response));
 
                 }}>
                     Read State
@@ -70,7 +70,6 @@ function Home () {
                     if (setCurrentVoucherId) setCurrentVoucherId(null);
                     if (setSignlessAccount) setSignlessAccount(null);
                     setPageSignlessMode(!pageSignlessMode);
-
                 }}>
                     toggle signless mode
                 </Button>
