@@ -1,6 +1,6 @@
 import { HexString } from "@gear-js/api";
-import { KeyringPair } from '@polkadot/keyring/types';
-import { createContext, useState } from "react";
+import {KeyringPair} from "@polkadot/keyring/types";
+import { createContext, useContext, useState } from "react";
 
 interface Props {
     children: JSX.Element
@@ -25,7 +25,7 @@ export const dAppContext = createContext<DAppContextI>({
 });   
 
 export const DAppContextProvider = ({ children }: Props)  => {
-    const [currentVoucherId, setCurrentVoucherId] = useState<HexString | null>(null);
+    const [currentVoucherId, setCurrentVoucherId] = useState<HexString | null>(() => null);
     const [signlessAccount, setSignlessAccount] = useState<KeyringPair | null>(null);
     const [noWalletSignlessAccountName, setNoWalletSignlessAccountName] = useState<string | null>(null);
 
@@ -43,4 +43,24 @@ export const DAppContextProvider = ({ children }: Props)  => {
             {children}
         </dAppContext.Provider>
     );
-}
+};
+
+export const useDAppContext = () => {
+    const {
+        currentVoucherId,
+        signlessAccount,
+        noWalletSignlessAccountName,
+        setSignlessAccount,
+        setNoWalletSignlessAccountName,
+        setCurrentVoucherId
+    } = useContext(dAppContext);
+
+    return {
+        currentVoucherId,
+        signlessAccount,
+        noWalletSignlessAccountName,
+        setSignlessAccount: setSignlessAccount as React.Dispatch<React.SetStateAction<KeyringPair | null>>,
+        setNoWalletSignlessAccountName: setNoWalletSignlessAccountName as React.Dispatch<React.SetStateAction<string | null>>,
+        setCurrentVoucherId: setCurrentVoucherId as React.Dispatch<React.SetStateAction<HexString | null>>
+    }
+};

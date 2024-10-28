@@ -26,7 +26,7 @@ export const sponsorName = 'Alice';
 export const sponsorMnemonic = 'bottom drive obey lake curtain smoke basket hold race lonely fit walk';
 
 export const CONTRACT_DATA: ContractSails = {
-  programId: '0x615556ca4bb31c9b3b9a5c30b20e110ffd51ffc78784308ea6ac2f9fbac13aa5',
+  programId: '0x0f986f5a85b7c1070a760661e55bce0bf70cbc0e0713f82d01c0d878914085d7',
   idl: `
     type KeyringData = struct {
       address: str,
@@ -48,16 +48,16 @@ export const CONTRACT_DATA: ContractSails = {
       UserAndKeyringAddressAreTheSame,
     };
 
-    type PingEvent = enum {
-      Ping,
-      Pong,
-      KeyringError: KeyringError,
-    };
-
     type KeyringQueryEvent = enum {
       LastWhoCall: actor_id,
       SignlessAccountAddress: opt actor_id,
       SignlessAccountData: opt KeyringData,
+    };
+
+    type PingEvent = enum {
+      Ping,
+      Pong,
+      KeyringError: KeyringError,
     };
 
     constructor {
@@ -67,6 +67,9 @@ export const CONTRACT_DATA: ContractSails = {
     service KeyringService {
       BindKeyringDataToUserAddress : (user_address: actor_id, keyring_data: KeyringData) -> KeyringEvent;
       BindKeyringDataToUserCodedName : (user_coded_name: str, keyring_data: KeyringData) -> KeyringEvent;
+      query KeyringAccountData : (keyring_address: actor_id) -> KeyringQueryEvent;
+      query KeyringAddressFromUserAddress : (user_address: actor_id) -> KeyringQueryEvent;
+      query KeyringAddressFromUserCodedName : (user_coded_name: str) -> KeyringQueryEvent;
     };
 
     service Ping {
@@ -76,13 +79,7 @@ export const CONTRACT_DATA: ContractSails = {
       Pong : () -> PingEvent;
       PongNoWallet : (user_coded_name: str) -> PingEvent;
       PongSignless : (user_address: actor_id) -> PingEvent;
-    };
-
-    service QueryService {
       query LastCaller : () -> actor_id;
-      query KeyringAccountData : (keyring_address: actor_id) -> KeyringQueryEvent;
-      query KeyringAddressFromUserAddress : (user_address: actor_id) -> KeyringQueryEvent;
-      query KeyringAddressFromUserCodedName : (user_coded_name: str) -> KeyringQueryEvent;
     };
   `
 };

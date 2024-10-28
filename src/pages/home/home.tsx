@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { dAppContext } from '@/Context/dappContext';
-import {  Button } from '@/components/ui/button';
+import { Button } from '@gear-js/vara-ui';
 import { useAccount } from '@gear-js/react-hooks';
 import { 
     NormalButtons,
@@ -32,7 +32,7 @@ function Home () {
             setPageSignlessMode(false);
         }
         if (setCurrentVoucherId) setCurrentVoucherId(null)
-    }, [account])
+    }, [account]);
 
     return (
         <div className='examples-container'>
@@ -59,7 +59,7 @@ function Home () {
                         return;
                     }
 
-                    const response = await sails.query('QueryService/LastCaller');
+                    const response = await sails.query('Ping/LastCaller');
 
                     setContractState("Last who call: " + JSON.stringify(response));
 

@@ -1,7 +1,7 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '@gear-js/vara-ui';
 import { useAccount, useAlert } from '@gear-js/react-hooks';
-import { dAppContext } from '@/Context/dappContext';
+import { useDAppContext } from '@/Context/dappContext';
 import { SignlessForm } from '../../SignlessForm/SignlessForm';
 import { decodeAddress } from '@gear-js/api';
 import { useSailsCalls } from '@/app/hooks';
@@ -18,10 +18,9 @@ export const SignlessButtons = () => {
         currentVoucherId,
         signlessAccount,
         noWalletSignlessAccountName,
-    } = useContext(dAppContext);
+    } = useDAppContext();
 
     const [userFillingTheForm, setUserFillingTheForm] = useState(false);
-    const [toSend, setToSend] = useState(['', {}]);
 
     const sendMessageWithPayload = async (method: string, payload: any) => {
         if (!sails) {

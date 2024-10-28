@@ -1,19 +1,17 @@
 import { Logo } from './logo';
-import { AccountInfo } from './account-info';
+import { Wallet } from '@gear-js/wallet-connect';
 import styles from './header.module.scss';
-import { MultiWallet } from '@/features/multiwallet/ui/wallet';
 
-type Props = {
+interface Props {
   isAccountVisible: boolean;
 };
 
 export function Header({ isAccountVisible }: Props) {
-  // const [isMenuOpen] = React.useState(false);
-
   return (
     <header className={styles.header}>
       <Logo />
-      {isAccountVisible && <MultiWallet/>}
+      {isAccountVisible && <Wallet theme='vara'/>}
+      
     </header>
   );
 

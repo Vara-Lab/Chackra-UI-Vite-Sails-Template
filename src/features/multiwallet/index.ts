@@ -1,1 +1,0 @@
-export { MultiWallet } from "./ui";

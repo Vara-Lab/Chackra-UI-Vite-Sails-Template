@@ -1,6 +1,7 @@
 
 
 import { Sails, TransactionBuilder } from "sails-js";
+import { SailsIdlParser } from "sails-js-parser";
 import { KeyringPair, KeyringPair$Json } from '@polkadot/keyring/types';
 import { GearApi, GearKeyring, HexString, IUpdateVoucherParams } from "@gear-js/api";
 import { 
@@ -101,7 +102,8 @@ export class SailsCalls {
      */
     static new = (data?: ISailsCalls): Promise<SailsCalls> => {
         return new Promise(async resolve => {
-            const sailsInstance = await Sails.new();
+            const parser = await SailsIdlParser.new();
+            const sailsInstance = new Sails(parser);
 
             let contractId: HexString | null = null;
             let idl: string | null = null;

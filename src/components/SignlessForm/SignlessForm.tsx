@@ -1,5 +1,5 @@
-import { useState, useContext, useEffect } from 'react'
-import { dAppContext } from '@/Context/dappContext'
+import { useState, useEffect } from 'react'
+import { useDAppContext } from '@/Context/dappContext'
 import { useSailsCalls } from '@/app/hooks';
 import { useForm } from 'react-hook-form'
 import { Input, Button, Modal } from '@gear-js/vara-ui';
@@ -28,9 +28,9 @@ const DEFAULT_VALUES: FormDefaultValuesI = {
 // For fast update, you can change this values
 const MIN_AMOUNT_OF_BLOCKS = 2; // min amount of blocks for vouchers
 const TOKENS_TO_ADD_TO_VOUCHER = 1; // tokens to add to voucher
-const BLOCKS_TO_RENEW_VOUCHER = 30; // blocks to renew voucher if is expired
+const BLOCKS_TO_RENEW_VOUCHER = 1_200; // blocks to renew voucher if is expired (one hour)
 const INITIAL_VOUCHER_TOKENS = 2; // Initial tokens for new vouchers
-const INITIAL_BLOCKS_FOR_VOUCHER = 30; // Initial blocks for voucher (one minute)
+const INITIAL_BLOCKS_FOR_VOUCHER = 1_200; // Initial blocks for voucher (one hour)
 
 
 
@@ -48,7 +48,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
         setSignlessAccount,
         setCurrentVoucherId,
         setNoWalletSignlessAccountName
-    } = useContext(dAppContext);
+    } = useDAppContext();
     
     const [loadingAnAction, setLoadingAnAction] = useState(false);
     const [userHasWallet, setUserHasWallet] = useState(false);
@@ -99,7 +99,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
                 }
             );
 
-            if (setCurrentVoucherId) setCurrentVoucherId(signlessVoucherId);
+            setCurrentVoucherId(signlessVoucherId);
         } catch(e) {
             alert.error('Error while issue a voucher to a singless account!');
             setLoadingAnAction(false);
@@ -130,9 +130,9 @@ export const SignlessForm = ({ closeForm }: Props) => {
             return;
         }
 
-        if (setSignlessAccount) setSignlessAccount(newSignlessAccount);
-        if (setCurrentVoucherId) setCurrentVoucherId(signlessVoucherId);
-        if (setNoWalletSignlessAccountName) setNoWalletSignlessAccountName(encryptedName);
+        setSignlessAccount(newSignlessAccount);
+        setCurrentVoucherId(signlessVoucherId);
+        setNoWalletSignlessAccountName(encryptedName);
         setLoadingAnAction(false);
         closeForm();
     };
@@ -146,7 +146,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
         setLoadingAnAction(true);
 
         const contractState: any = await sails.query(
-            'QueryService/KeyringAddressFromUserAddress',
+            'KeyringService/KeyringAddressFromUserAddress',
             {
                 callArguments: [
                     account.decodedAddress
@@ -158,7 +158,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
 
         if (signlessAccountAddress) {
             const contractState = await sails.query(
-                'QueryService/KeyringAccountData',
+                'KeyringService/KeyringAccountData',
                 {
                     callArguments: [
                         signlessAccountAddress
@@ -201,8 +201,8 @@ export const SignlessForm = ({ closeForm }: Props) => {
                 return;
             } 
 
-            if (setSignlessAccount) setSignlessAccount(signlessDataFromContract);
-            if (setCurrentVoucherId) setCurrentVoucherId(vouchersId[0]);
+            setSignlessAccount(signlessDataFromContract);
+            setCurrentVoucherId(vouchersId[0]);
             setLoadingAnAction(false);
             closeForm();
             return;
@@ -233,7 +233,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
                 }
             );
 
-            if (setCurrentVoucherId) setCurrentVoucherId(signlessVoucherId);
+            setCurrentVoucherId(signlessVoucherId);
         } catch(e) {
             alert.error('Error while issue a voucher to a singless account!');
             setLoadingAnAction(false);
@@ -264,12 +264,11 @@ export const SignlessForm = ({ closeForm }: Props) => {
             return;
         }
 
-        if (setSignlessAccount) setSignlessAccount(newSignlessAccount);
-        if (setCurrentVoucherId) setCurrentVoucherId(signlessVoucherId);
+        setSignlessAccount(newSignlessAccount);
+        setCurrentVoucherId(signlessVoucherId);
 
         setLoadingAnAction(false);
         closeForm();
-
     }
 
     const handleSubmitNoWalletSignless = async ({accountName, password}: FormDefaultValuesI) => {
@@ -283,7 +282,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
         const encryptedName = CryptoJs.SHA256(accountName).toString();
 
         let contractState: any = await sails.query(
-            'QueryService/KeyringAddressFromUserCodedName',
+            'KeyringService/KeyringAddressFromUserCodedName',
             {
                 callArguments: [
                     encryptedName
@@ -300,7 +299,7 @@ export const SignlessForm = ({ closeForm }: Props) => {
         }
 
         contractState = await sails.query(
-            'QueryService/KeyringAccountData',
+            'KeyringService/KeyringAccountData',
             {
                 callArguments: [
                     signlessAccountAddress
@@ -338,9 +337,9 @@ export const SignlessForm = ({ closeForm }: Props) => {
             vouchersId[0]
         );
 
-        if (setSignlessAccount) setSignlessAccount(signlessDataFromContract);
-        if (setCurrentVoucherId) setCurrentVoucherId(vouchersId[0]);
-        if (setNoWalletSignlessAccountName) setNoWalletSignlessAccountName(encryptedName);
+        setSignlessAccount(signlessDataFromContract);
+        setCurrentVoucherId(vouchersId[0]);
+        setNoWalletSignlessAccountName(encryptedName);
         setLoadingAnAction(false);
         closeForm();
     };

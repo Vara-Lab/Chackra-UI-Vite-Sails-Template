@@ -2,7 +2,7 @@ import { useAccount, useApi } from "@gear-js/react-hooks";
 import { ApiLoader } from "@/components";
 import { Header } from "@/components/layout";
 import { withProviders } from "@/app/hocs";
-import { useWalletSync } from "@/features/wallet/hooks";
+import { useEnableWeb3 } from "./app/hooks";
 import { Routing } from "./pages";
 import { useInitSails } from "./app/hooks";
 import { CONTRACT_DATA, sponsorName, sponsorMnemonic } from "./app/consts";
@@ -10,7 +10,9 @@ import "@gear-js/vara-ui/dist/style.css";
 
 function Component() {
   const { isApiReady } = useApi();
-  const { isAccountReady } = useAccount();
+  const { isAccountReady, account } = useAccount();
+  const { web3IsEnable } = useEnableWeb3();
+  const isAppReady = isApiReady && isAccountReady && web3IsEnable;
 
   // Put your contract id and idl
   useInitSails({
@@ -25,10 +27,6 @@ function Component() {
       sponsorMnemonic
     }
   });
-
-  useWalletSync();
-
-  const isAppReady = isApiReady && isAccountReady;
 
   // App with context
   return (
