@@ -11583,18 +11583,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sails-js-parser@npm:0.1.0":
-  version: 0.1.0
-  resolution: "sails-js-parser@npm:0.1.0"
+"sails-js-parser@npm:0.3.1":
+  version: 0.3.1
+  resolution: "sails-js-parser@npm:0.3.1"
   peerDependencies:
     sails-js-types: 0.0.1
-  checksum: 8c0c00f82d6803ad8b39bce9b76a03f91c261fbc4796747a117ad8163cdb1a1670954872595dd022e03c7faa5243f1c4c34dafa6202e3b6a4b3b50dfe16b8af1
+  checksum: 40c2605262667ea8bcbb53466d922ef186a8dffe904811a4df692e896f3fc34a9bf5fa3bf393f242af76a9e77a5c896e571d53e97ee744f5d369c7975587c056
   languageName: node
   linkType: hard
 
-"sails-js@npm:0.3.0":
-  version: 0.3.0
-  resolution: "sails-js@npm:0.3.0"
+"sails-js@npm:0.3.1":
+  version: 0.3.1
+  resolution: "sails-js@npm:0.3.1"
   peerDependencies:
     "@gear-js/api": 0.38.3
     "@polkadot/api": 13.2.1
@@ -11603,7 +11603,7 @@ __metadata:
     sails-js-util: 0.0.1
   bin:
     sails-js: ./lib/app.js
-  checksum: 499901835fc1b843b6bcaf77b9c93370d2031b45d65a6732c4acd91502667fbdbc206a3ba0a9f49227a31367e8dcddd205e8c0f38fbe7eeecce78f0c9d44e300
+  checksum: d1a26f2c1e8aa760bfe99da2e23fd0d7bddd64cd84e3b2b2679dc10450168582f56a06682d8f9ccd6f92f4945325da22ea119d4c0871ccccbaba102f22a1e8f0
   languageName: node
   linkType: hard
 
@@ -12182,8 +12182,8 @@ __metadata:
     react-hook-form: "npm:7.51.5"
     react-icons: "npm:5.2.1"
     react-router-dom: "npm:6.22.2"
-    sails-js: "npm:0.3.0"
-    sails-js-parser: "npm:0.1.0"
+    sails-js: "npm:0.3.1"
+    sails-js-parser: "npm:0.3.1"
     sass: "npm:1.69.1"
     simplebar-react: "npm:3.2.6"
     tailwindcss: "npm:3.3.2"
